@@ -3,6 +3,7 @@ package com.example.mssql.DAO;
 import com.example.mssql.domain.EventLog;
 import com.example.mssql.domain.Keys;
 import com.example.mssql.domain.Person;
+import com.example.mssql.domain.WorkHistory;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,17 +13,18 @@ import javax.persistence.EntityManagerFactory;
 
 import java.sql.Timestamp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class Repository {
 
-    @Autowired
-    EntityManagerFactory entityManagerFactory;
-    private List<Keys> keys;
+            @Autowired
+            EntityManagerFactory entityManagerFactory;
+            private List<Keys> keys = new ArrayList<>();
+            List<WorkHistory> workHistories = new ArrayList<>();
 
-
-    public List<EventLog> select(Timestamp date3, Timestamp time3, String codes){
+    public List<EventLog> select(Timestamp date3, Timestamp time3){
         SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
        Session session = sessionFactory.openSession();
 
@@ -56,4 +58,19 @@ public class Repository {
         return person;
     }
 
+    public List<WorkHistory> selectWorkHistory (Integer id) {
+        SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
+        Session session = sessionFactory.openSession();
+
+        workHistories = session.createQuery("select w from WorkHistory w left join w.person p where p.PersonId = :id")
+                .setParameter("id", id)
+                .list();
+
+        session.close();
+
+System.out.println(workHistories.get(14).getPerson().getLastName());
+        System.out.println(workHistories.get(14).getKeys().getKeyCode());
+
+        return workHistories;
+    }
 }

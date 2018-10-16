@@ -2,6 +2,7 @@ package com.example.mssql.Controllers;
 
 
 
+import com.example.mssql.BL.MainSolver;
 import com.example.mssql.BL.PersonListPrepare;
 import com.example.mssql.DAO.Repository;
 import com.example.mssql.BL.DateTimeConverter;
@@ -19,23 +20,17 @@ import java.text.ParseException;
 import java.util.*;
 
 @Controller
-public class GreetingController {
+public class ReportsController {
 
-    @Autowired
-    TransactionLogRepository TrRepo;
+
     @Autowired
     Repository repository;
+
     @Autowired
-    DateTimeConverter dateTimeConverter;
-    @Autowired
-    TimeByDaySolver timeByDaySolver;
-    @Autowired
-    PersonListPrepare personListPrepare;
+    MainSolver mainSolver;
 
 
-    public Timestamp date3;
-    public Timestamp time3;
-    private String codes;
+
 
 
     /*@ModelAttribute("keys")
@@ -49,23 +44,21 @@ public class GreetingController {
 
     Iterable<Person> person = repository.selectPerson();
 
-
+    repository.selectWorkHistory(14);
     model.put("person", person);
         return "main";
     }
 
 
     @PostMapping("main")
-    public String main(@RequestParam String date, String time, String PersonIdList, Map<String, Object> model) throws ParseException {
+    public String main(@RequestParam String date, String time, String personIdList, Map<String, Object> model) throws ParseException {
 
-            date3 = dateTimeConverter.convertDate(date);
 
-            time3 = dateTimeConverter.convertTime(time);
 
-            personListPrepare.convert(PersonIdList);
+            String result = mainSolver.solve(date, time, personIdList);
 
-            model.put("all", timeByDaySolver.solve(date3, time3, codes));
-            model.put("codes", codes);
+            model.put("all", result);
+
             model.put("dayNumber", date);
             return "main";
 

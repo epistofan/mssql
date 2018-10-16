@@ -22,4 +22,20 @@ public class Keys {
     @Column(name="KeyCode", columnDefinition = "char(40)")
     private String KeyCode;
 
+
+    public int getId() {
+        return Id;
+    }
+
+    public void setId(int id) {
+        Id = id;
+    }
+
+    public String getKeyCode() {
+        return KeyCode;
+    }
+
+    public void setKeyCode(String keyCode) {
+        KeyCode = keyCode;
+    }
 }

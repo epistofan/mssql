@@ -22,10 +22,6 @@ public class Person {
 
 
 
-    @ManyToOne
-    @JoinColumn(name = "PersonId", nullable = false)
-    private WorkHistory workHistory;
-
 
     @Column(name = "Deleted")
     private boolean Deleted;
@@ -35,6 +31,7 @@ public class Person {
 
     @Column(name = "FirstName", columnDefinition = "varchar(50)")
     private String FirstName;
+
 
 
     public int getPersonId() {
