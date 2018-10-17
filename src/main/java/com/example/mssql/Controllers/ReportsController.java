@@ -44,7 +44,7 @@ public class ReportsController {
 
     Iterable<Person> person = repository.selectPerson();
 
-    repository.selectWorkHistory(14);
+    //repository.selectWorkHistory(14);
     model.put("person", person);
         return "main";
     }

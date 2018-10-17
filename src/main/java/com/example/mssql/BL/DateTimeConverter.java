@@ -37,7 +37,7 @@ public class DateTimeConverter {
         int timeNedeed = dt.getMillisOfDay();
         System.out.println(timeNedeed);
 
-        Timestamp convertedTime = new java.sql.Timestamp(parsedDateT.getTime()+timeNedeed);
+        Timestamp convertedTime = new java.sql.Timestamp(parsedDateT.getTime());
         System.out.println(convertedTime);
 
 

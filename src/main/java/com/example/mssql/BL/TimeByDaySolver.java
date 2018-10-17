@@ -25,7 +25,7 @@ public class TimeByDaySolver {
     @Autowired
     DateTimeConverter dateTimeConverter;
     Stack<Object> stack = new Stack<>();
-    List<EventLog> events3;
+    List<WorkHistory> events3;
     Stack<EventLog> events = new Stack<>();
     List<EventLog> test = new ArrayList<>();
 
@@ -33,7 +33,7 @@ public class TimeByDaySolver {
 
         Timestamp date3 = (Timestamp) listOfPreparedData.get(0);
         Timestamp time3 = (Timestamp) listOfPreparedData.get(1);
-        List codes = (List) listOfPreparedData.get(2);
+        List<String> codes = (List<String>) listOfPreparedData.get(2);
 
 
         List<EventLog> events1 = repository.select(date3, time3);
@@ -58,39 +58,23 @@ public class TimeByDaySolver {
         System.out.println(test.size());
 
 
-        while(!codes.isEmpty()){
+        for(i=0; i<codes.size(); i++) {
 
-            codes.get(i);
-            //List<WorkHistory> events3 = repository.selectWorkHistory(codes.get(i).toString());
-            for(j=0; events.isEmpty(); j++){
+                     int idr = Integer.parseInt(codes.get(i));
 
-                if(events.pop().getEventId() == i){
+                     events3 = repository.selectWorkHistory(idr);
 
-                    stack.push(events.pop());
+            for(j=0; j<test.size(); j++){
 
-
-                }
-
-
-
-
+            if(test.get(j).getKeyCode() == events3.get(i).getKeys().getKeyCode()){
+                test.get(j).getKeyCode();
+                events3.get(i).getKeys().getKeyCode();
+                System.out.println("yes");
             }
-
-
-
-
-
-
-            codes.remove(i);
-
-
-
-
-
-
-
-
+            }
         }
+
+
 
 
 

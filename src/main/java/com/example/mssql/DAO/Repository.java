@@ -31,7 +31,7 @@ public class Repository {
 
 
             //List events = session.createQuery("select e from EventLog e where e.EventDate = :date and e.KeyCode = :codes order by e.EventTime asc")
-        List events = session.createQuery("select e from EventLog e where e.EventDate = :date")
+        List events = session.createQuery("select e from EventLog e where e.EventDate = :date ")
 
             .setParameter("date", date3)
            // .setParameter("time", time3)
@@ -58,18 +58,18 @@ public class Repository {
         return person;
     }
 
-    public List<WorkHistory> selectWorkHistory (Integer id) {
+    public List<WorkHistory> selectWorkHistory (int id) {
         SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
         Session session = sessionFactory.openSession();
 
-        workHistories = session.createQuery("select w from WorkHistory w left join w.person p where p.PersonId = :id")
+        workHistories = session.createQuery("select w from WorkHistory w left join w.person p where p.PersonId = :id ")
                 .setParameter("id", id)
                 .list();
 
         session.close();
 
-System.out.println(workHistories.get(14).getPerson().getLastName());
-        System.out.println(workHistories.get(14).getKeys().getKeyCode());
+        //System.out.println(workHistories.get(0).getPerson().getLastName());
+        //System.out.println(workHistories.get(0).getKeys().getKeyCode());
 
         return workHistories;
     }
