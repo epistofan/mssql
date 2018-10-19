@@ -62,7 +62,11 @@ public class Repository {
         SessionFactory sessionFactory = entityManagerFactory.unwrap(SessionFactory.class);
         Session session = sessionFactory.openSession();
 
-        workHistories = session.createQuery("select w from WorkHistory w left join w.person p where p.PersonId = :id ")
+       /* workHistories = session.createQuery("select w from WorkHistory w left join w.person p where p.PersonId = :id ")
+                .setParameter("id", id)
+              id  .list();*/
+
+        workHistories = session.createQuery("select new WorkHistory w left join w.person p where p.PersonId = :id ")
                 .setParameter("id", id)
                 .list();
 

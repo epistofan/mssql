@@ -65,6 +65,8 @@ public class TimeByDaySolver {
                      events3 = repository.selectWorkHistory(idr);
 
             for(j=0; j<test.size(); j++){
+              String trtrtrtr =  test.get(j).getKeyCode();
+               String uyfvbkl = events3.get(i).getKeys().getKeyCode();
 
             if(test.get(j).getKeyCode() == events3.get(i).getKeys().getKeyCode()){
                 test.get(j).getKeyCode();
