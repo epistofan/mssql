@@ -1,35 +1,31 @@
 package com.example.mssql.domain;
 
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
+
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-@Entity
-@Table(name="Person", catalog="DAccess", schema="DBO")
+
 public class Person {
 
     public Person() {
     }
 
-    @Id
-    @Column(name="PersonID")
+
     private int PersonId;
 
 
 
 
-    @Column(name = "Deleted")
     private boolean Deleted;
 
-    @Column(name = "LastName", columnDefinition = "varchar(50)")
+
     private String LastName;
 
-    @Column(name = "FirstName", columnDefinition = "varchar(50)")
+
     private String FirstName;
 
 

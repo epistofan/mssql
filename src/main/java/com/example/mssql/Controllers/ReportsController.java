@@ -3,11 +3,7 @@ package com.example.mssql.Controllers;
 
 
 import com.example.mssql.BL.MainSolver;
-import com.example.mssql.BL.PersonListPrepare;
 import com.example.mssql.DAO.Repository;
-import com.example.mssql.BL.DateTimeConverter;
-import com.example.mssql.BL.TimeByDaySolver;
-import com.example.mssql.TransactionLogRepository;
 import com.example.mssql.domain.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.*;
 

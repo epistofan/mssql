@@ -1,48 +1,43 @@
 package com.example.mssql.domain;
 
-import org.hibernate.annotations.Nationalized;
-import org.hibernate.type.StringType;
+
 import org.springframework.stereotype.Component;
 
-import javax.persistence.*;
+
 import java.time.LocalTime;
 import java.time.LocalDate;
 import java.util.Objects;
 
 
-@Entity
-    @Table(name="EventLog", catalog="DAccess", schema="DBO")
+
     public class EventLog {
 
         public EventLog() {
         }
 
-       @Id
-       @Column(name="EventID")
        private int EventId;
 
-        @Column(name="EventDate", columnDefinition = "datetime")
         private java.sql.Timestamp EventDate;
 
-        @Column(name="EventTime", columnDefinition = "datetime")
+
         private java.sql.Timestamp EventTime;
 
-        @Column(name="EventTypeCode")
+
         private int EventTypeCode;
 
-        @Column(name="PreprocessorID")
+
         private int PreprocessorId;
 
-        @Column(name="DeviceID")
+
         private int DeviceId;
 
-        @Column(name="KeyCode", columnDefinition = "char(40)")
+
         private String KeyCode;
 
-        @Column(name="DoorState")
+
         private int DoorState;
 
-        @Column(name="Changed", columnDefinition = "char(1)")
+
         private String Changed;
 
     public int getEventId() {

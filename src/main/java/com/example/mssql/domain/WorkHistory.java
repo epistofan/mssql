@@ -1,15 +1,13 @@
 package com.example.mssql.domain;
 
 
-import org.hibernate.annotations.Fetch;
-import org.hibernate.annotations.FetchMode;
 
-import javax.persistence.*;
+
+
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
-@Table(name="WorkHistory", catalog="DAccess", schema="DBO")
+
 public class WorkHistory {
 
 
@@ -17,20 +15,14 @@ public class WorkHistory {
     }
 
 
-    @Id
-    @Column(name="ID")
     private int Id ;
 
 
-    @ManyToOne
-    @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "PersonID")
+
     private Person person;
 
 
-    @ManyToOne
-    @Fetch(FetchMode.JOIN)
-    @JoinColumn(name = "KeyID")
+
     private Keys keys;
 
 

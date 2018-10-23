@@ -2,6 +2,7 @@ package com.example.mssql.BL;
 
 import com.example.mssql.DAO.Repository;
 import com.example.mssql.domain.EventLog;
+import com.example.mssql.domain.Events;
 import com.example.mssql.domain.WorkHistory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -25,7 +26,7 @@ public class TimeByDaySolver {
     @Autowired
     DateTimeConverter dateTimeConverter;
     Stack<Object> stack = new Stack<>();
-    List<WorkHistory> events3;
+    List<Events> events3;
     Stack<EventLog> events = new Stack<>();
     List<EventLog> test = new ArrayList<>();
 
@@ -62,7 +63,7 @@ public class TimeByDaySolver {
 
                      int idr = Integer.parseInt(codes.get(i));
 
-                     events3 = repository.selectWorkHistory(idr);
+                     events3 = repository.selectEvents(idr);
 
             for(j=0; j<test.size(); j++){
               String trtrtrtr =  test.get(j).getKeyCode();

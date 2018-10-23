@@ -1,12 +1,11 @@
 package com.example.mssql.domain;
 
 
-import javax.persistence.*;
+
 import java.util.Date;
 import java.util.Objects;
 
-@Entity
-@Table(name="TransactionLog", catalog="DAccess", schema="DBO")
+
 public class TransactionLog {
 
     public TransactionLog() {
@@ -22,19 +21,18 @@ public class TransactionLog {
         Note = note;
     }
 
-    @Id
-    @Column(name="TransactionID")
+
     private int TransactionId;
 
-    @Column(name="UserID")
+
     private int UserId;
-    @Column(name="TransactionTypeCode")
+
     private int TransactionTypeCode;
-    @Column(name="TransactionDate")
+
     private java.util.Date TransactionDate;
-    @Column(name="TransactionTime")
+
     private java.util.Date TransactionTime;
-    @Column(name="Note")
+
     private String Note;
 
     public int getTransactionId() {
