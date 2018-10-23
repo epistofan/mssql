@@ -95,11 +95,7 @@ public class Repository {
         //System.out.println(workHistories.get(0).getPerson().getLastName());
         //System.out.println(workHistories.get(0).getKeys().getKeyCode());
 
-        String sql = "SELECT  Person.PersonID, Person.LastName, Person.FirstName, WorkHistory.KeyID, WorkHistory.ID, Keys.KeyCode, EventLog.EventDate, EventLog.EventTime, EventLog.DeviceID" +
-                "FROM WorkHistory" +
-                "JOIN Person ON Person.PersonID=WorkHistory.PersonID" +
-                "JOIN Keys ON WorkHistory.KeyID=Keys.ID" +
-                "JOIN EventLog ON Keys.KeyCode=EventLog.KeyCode where EventDate='2015-01-01'";
+        String sql = "SELECT  Person.PersonID, Person.LastName, Person.FirstName, WorkHistory.KeyID, WorkHistory.ID, Keys.KeyCode, EventLog.EventDate, EventLog.EventTime, EventLog.DeviceID FROM WorkHistory JOIN Person ON Person.PersonID=WorkHistory.PersonID JOIN Keys ON WorkHistory.KeyID=Keys.ID JOIN EventLog ON Keys.KeyCode=EventLog.KeyCode where EventDate='2015-01-01' and Person.PersonID='113' order by EventTime";
 
         List<Events> events  = new ArrayList();
         try {

@@ -40,6 +40,9 @@ public class TimeByDaySolver {
         List<EventLog> events1 = repository.select(date3, time3);
 
 
+        int idr = Integer.parseInt(codes.get(i));
+
+        events3 = repository.selectEvents(idr);
 
         System.out.println("before");
         //while (events1.size() != test.size()) {
@@ -61,19 +64,12 @@ public class TimeByDaySolver {
 
         for(i=0; i<codes.size(); i++) {
 
-                     int idr = Integer.parseInt(codes.get(i));
-
-                     events3 = repository.selectEvents(idr);
 
             for(j=0; j<test.size(); j++){
               String trtrtrtr =  test.get(j).getKeyCode();
-               String uyfvbkl = events3.get(i).getKeys().getKeyCode();
 
-            if(test.get(j).getKeyCode() == events3.get(i).getKeys().getKeyCode()){
-                test.get(j).getKeyCode();
-                events3.get(i).getKeys().getKeyCode();
-                System.out.println("yes");
-            }
+
+
             }
         }
 
