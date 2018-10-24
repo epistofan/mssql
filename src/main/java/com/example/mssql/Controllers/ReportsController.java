@@ -4,6 +4,7 @@ package com.example.mssql.Controllers;
 
 import com.example.mssql.BL.MainSolver;
 import com.example.mssql.DAO.Repository;
+import com.example.mssql.domain.OrgUnit;
 import com.example.mssql.domain.Person;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,22 +40,26 @@ public class ReportsController {
 
     Iterable<Person> person = repository.selectPerson();
 
+    Iterable<OrgUnit> orgUnits = repository.selectOrgUnits();
+
     //repository.selectWorkHistory(14);
     model.put("person", person);
+    model.put("orgunits", orgUnits);
+
         return "main";
     }
 
 
     @PostMapping("main")
-    public String main(@RequestParam String date, String time, String personIdList, Map<String, Object> model) throws ParseException {
+    public String main(@RequestParam String dateFrom, String dateTill, String time, String personIdList, Map<String, Object> model) throws ParseException {
 
 
 
-            String result = mainSolver.solve(date, time, personIdList);
+            String result = mainSolver.solve(dateFrom, time, personIdList);
 
             model.put("all", result);
 
-            model.put("dayNumber", date);
+            model.put("dayNumber", dateFrom);
             return "main";
 
     }

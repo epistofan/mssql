@@ -13,9 +13,9 @@ public class PersonListPrepare {
 
     public List<String> convert (String PersonIdList){
 
-            ArrayList listOfCodes = new ArrayList(Arrays.asList(PersonIdList.split(",")));
+            ArrayList listOfUserId = new ArrayList(Arrays.asList(PersonIdList.split(",")));
 
-        return listOfCodes;
+        return listOfUserId;
     }
 
 }

@@ -25,8 +25,8 @@ public class TimeByDaySolver {
     Repository repository;
     @Autowired
     DateTimeConverter dateTimeConverter;
-    Stack<Object> stack = new Stack<>();
-    List<Events> events3;
+    Stack<Events> stack = new Stack<>();
+    List<Events> eventsOfOneDay;
     Stack<EventLog> events = new Stack<>();
     List<EventLog> test = new ArrayList<>();
 
@@ -34,39 +34,37 @@ public class TimeByDaySolver {
 
         Timestamp date3 = (Timestamp) listOfPreparedData.get(0);
         Timestamp time3 = (Timestamp) listOfPreparedData.get(1);
-        List<String> codes = (List<String>) listOfPreparedData.get(2);
+        List<String> userId = (List<String>) listOfPreparedData.get(2);
 
 
-        List<EventLog> events1 = repository.select(date3, time3);
-
-
-        int idr = Integer.parseInt(codes.get(i));
-
-        events3 = repository.selectEvents(idr);
+        eventsOfOneDay = repository.selectEvents();
 
         System.out.println("before");
-        //while (events1.size() != test.size()) {
-        for(i=0; i<events1.size(); i++) {
 
-                    System.out.println(events1.get(i));
-                    System.out.println(events1.get(i).getKeyCode());
+        for(i=0; i<eventsOfOneDay.size(); i++) {
 
-                    test.add(events1.get(i));
-                   //events1.remove(i);
+int a = eventsOfOneDay.get(i).getPersonId();
+int b = Integer.valueOf(userId.get(0));
+            if( a == b ){
+                stack.push(eventsOfOneDay.get(i));
+            }
+
 
         }
 
 
         System.out.println("after");
         System.out.println("after2");
-        System.out.println(test.size());
+        System.out.println(stack.size());
+while(!stack.isEmpty()){
+    System.out.println(stack.pop().getEventTime());
+}
 
-
-        for(i=0; i<codes.size(); i++) {
+        for(i=0; i<userId.size(); i++) {
 
 
             for(j=0; j<test.size(); j++){
-              String trtrtrtr =  test.get(j).getKeyCode();
+
 
 
 

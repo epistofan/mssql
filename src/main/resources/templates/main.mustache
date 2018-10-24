@@ -37,7 +37,7 @@ input[type=text] {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-    border: 2px solid white;
+    border: 1px solid gray;
     border-radius: 4px;
 }
 input[type=date] {
@@ -45,7 +45,7 @@ input[type=date] {
     padding: 12px 20px;
     margin: 8px 0;
     box-sizing: border-box;
-    border: 2px solid white;
+    border: 1px solid gray;
     border-radius: 4px;
 }
 input[type=button], input[type=submit], input[type=reset] {
@@ -159,17 +159,23 @@ input[type=button], input[type=submit], input[type=reset] {
 
 
     <div class="item2">
-        MENU
+        .......
         <br>
        <div>
         <form method="post">
             Date:
             <br>
-            <input type="date" name="date", required="true">
+            no
+            <br>
+            <input type="date" name="dateFrom", required="true">
+            <br>
+            lidz
+            <br>
+            <input type="date" name="dateTill", required="true">
             <br>
             Person:
             <br>
-            <select name="codes" multiple size="10" required="true" style="width:200px;" >
+            <select name="personIdList" multiple size="10" required="true" style="width:200px;" >
                 {{#person}}
                     <option value="{{PersonId}}">{{PersonId}}. {{FirstName}} {{LastName}}</option>
                 {{/person}}
@@ -178,9 +184,9 @@ input[type=button], input[type=submit], input[type=reset] {
             Dept.:
             <br>
             <select name="personIdList" multiple size="10" required="true" style="width:200px;" >
-                {{#person}}
-                    <option value="{{PersonId}}">{{PersonId}}. {{FirstName}} {{LastName}}</option>
-                {{/person}}
+                {{#orgunits}}
+                    <option value="{{OrgUnitId}}">{{OrgUnitId}}. {{OrgUnitName}}</option>
+                {{/orgunits}}
             </select>
             <br>
             <input type="submit"> <input type="reset">
