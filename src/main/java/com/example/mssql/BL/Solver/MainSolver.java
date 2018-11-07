@@ -1,14 +1,15 @@
-package com.example.mssql.BL;
+package com.example.mssql.BL.Solver;
 
+import com.example.mssql.BL.DateTimeConverter;
+import com.example.mssql.BL.PersonListPrepare;
+import com.example.mssql.BL.Solver.TimeByDaySolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Component
 public class MainSolver {

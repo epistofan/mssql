@@ -1,5 +1,6 @@
-package com.example.mssql.BL;
+package com.example.mssql.BL.Solver;
 
+import com.example.mssql.BL.DateTimeConverter;
 import com.example.mssql.DAO.Repository;
 import com.example.mssql.domain.EventLog;
 import com.example.mssql.domain.Events;
@@ -21,14 +22,15 @@ public class TimeByDaySolver {
     int j;
     List events4 = new ArrayList();
 
-    @Autowired
-    Repository repository;
+
     @Autowired
     DateTimeConverter dateTimeConverter;
-    Stack<Events> stack = new Stack<>();
-    List<Events> eventsOfOneDay;
+    @Autowired
+    Repository repository;
+
+    private List<Events> eventsOfOneDay;
     Stack<EventLog> events = new Stack<>();
-    List<EventLog> test = new ArrayList<>();
+
 
     public String solve(List listOfPreparedData) {
 
@@ -36,40 +38,13 @@ public class TimeByDaySolver {
         Timestamp time3 = (Timestamp) listOfPreparedData.get(1);
         List<String> userId = (List<String>) listOfPreparedData.get(2);
 
+          System.out.println("choose from events needed id");
 
-        eventsOfOneDay = repository.selectEvents();
-
-        System.out.println("before");
-
-        for(i=0; i<eventsOfOneDay.size(); i++) {
-
-int a = eventsOfOneDay.get(i).getPersonId();
-int b = Integer.valueOf(userId.get(0));
-            if( a == b ){
-                stack.push(eventsOfOneDay.get(i));
-            }
+          eventsOfOneDay = repository.selectEvents(date3);
+          Sorting sorting = new Sorting();
+          sorting.sort(eventsOfOneDay, userId);
 
 
-        }
-
-
-        System.out.println("after");
-        System.out.println("after2");
-        System.out.println(stack.size());
-while(!stack.isEmpty()){
-    System.out.println(stack.pop().getEventTime());
-}
-
-        for(i=0; i<userId.size(); i++) {
-
-
-            for(j=0; j<test.size(); j++){
-
-
-
-
-            }
-        }
 
 
 

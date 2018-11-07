@@ -1,6 +1,7 @@
 package com.example.mssql.DAO;
 
 import com.example.mssql.BL.DbConnection;
+import com.example.mssql.BL.ResultSetConverter;
 import com.example.mssql.domain.*;
 
 import org.springframework.stereotype.Component;
@@ -16,9 +17,11 @@ public class Repository {
 
             ResultSet resultSet = null;
             Statement statement = null;
+            PreparedStatement preparedStatement = null;
             java.sql.Connection conn = null;
             DbConnection dbConnection  = new DbConnection ();
 
+            private List<Events> events  = new ArrayList();
             private List<Keys> keys = new ArrayList<>();
             List<WorkHistory> workHistories = new ArrayList<>();
 
@@ -58,34 +61,37 @@ public class Repository {
         return rperson;
     }
 
-    public List<Events> selectEvents () {
+    public List<Events> selectEvents (Timestamp timestamp) {
 
-        String sql = "SELECT  Person.PersonID, Person.LastName, Person.FirstName, WorkHistory.KeyID, WorkHistory.ID, Keys.KeyCode, EventLog.EventDate, EventLog.EventTime, EventLog.DeviceID FROM WorkHistory JOIN Person ON Person.PersonID=WorkHistory.PersonID JOIN Keys ON WorkHistory.KeyID=Keys.ID JOIN EventLog ON Keys.KeyCode=EventLog.KeyCode where EventDate='2015-01-01' order by EventTime";
+        /*String sql = "SELECT WorkHistory.KeyID, WorkHistory.PersonID, WorkHistory.Date_End, EventLog.KeyCode, EventLog.EventTime, EventLog.EventDate, EventLog.DeviceID, "
+                + "Device.DeviceName "
+                +"FROM WorkHistory INNER JOIN "
+                +"Person ON WorkHistory.PersonID = Person.PersonID INNER JOIN "
+                +"Keys ON WorkHistory.KeyID = Keys.ID INNER JOIN "
+                +"EventLog ON Keys.KeyCode = EventLog.KeyCode INNER JOIN "
+                +"Device ON EventLog.DeviceID = Device.DeviceID "
+                +"WHERE (Person.PersonID = 99) AND (WorkHistory.KeyID <> 1) AND (WorkHistory.Date_End > '2015-01-01') AND (EventLog.EventDate = CONVERT(DATETIME, "
+                +"'2015-01-01 00:00:00', 102)) "
+                +"ORDER BY EventLog.EventTime";
+*/
+        String sql = "Select* from Eventlog where EventDate = ?";
 
-        List<Events> events  = new ArrayList();
         try {
             conn = dbConnection.getDbConnection();
-            statement = conn.createStatement();
-            resultSet = statement.executeQuery(sql);
-            int i = 0;
-            while (resultSet.next()) {
+            preparedStatement = conn.prepareStatement(sql);
+            preparedStatement.setTimestamp(1, timestamp);
+            resultSet = preparedStatement.executeQuery();
 
-                System.out.println(resultSet.getString("LastName"));
-                Events event = new Events();
-                event.setPersonId(resultSet.getInt(1));
-                event.setEventDate(resultSet.getTimestamp(7));
-                event.setEventTime(resultSet.getTimestamp(8));
-                event.setDeviceId(resultSet.getInt(9));
+            ResultSetConverter resultSetConverter = new ResultSetConverter();
+            events = resultSetConverter.convert(resultSet);
 
-
-                events.add(i, event);
-                i++;
-            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return events;
     }
+
+
 
     public List<OrgUnit> selectOrgUnits () {
 

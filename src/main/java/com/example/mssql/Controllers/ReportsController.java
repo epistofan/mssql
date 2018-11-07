@@ -2,10 +2,12 @@ package com.example.mssql.Controllers;
 
 
 
-import com.example.mssql.BL.MainSolver;
+import com.example.mssql.BL.IntervalSolver;
+import com.example.mssql.BL.Solver.MainSolver;
 import com.example.mssql.DAO.Repository;
 import com.example.mssql.domain.OrgUnit;
 import com.example.mssql.domain.Person;
+import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,7 +41,8 @@ public class ReportsController {
     public String main(Map<String, Object> model) {
 
     Iterable<Person> person = repository.selectPerson();
-
+IntervalSolver intervalSolver = new IntervalSolver();
+intervalSolver.solve();
     Iterable<OrgUnit> orgUnits = repository.selectOrgUnits();
 
     //repository.selectWorkHistory(14);
