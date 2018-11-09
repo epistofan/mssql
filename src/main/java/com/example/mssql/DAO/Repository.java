@@ -4,6 +4,7 @@ import com.example.mssql.BL.DbConnection;
 import com.example.mssql.BL.ResultSetConverter;
 import com.example.mssql.domain.*;
 
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Component;
 
 
@@ -12,7 +13,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+
 public class Repository {
 
             ResultSet resultSet = null;
@@ -55,6 +56,7 @@ public class Repository {
             }
         } catch (SQLException e) {
             e.printStackTrace();
+            System.out.println("cant connect to db");
         }
 
 
@@ -74,12 +76,15 @@ public class Repository {
                 +"'2015-01-01 00:00:00', 102)) "
                 +"ORDER BY EventLog.EventTime";
 */
-        String sql = "Select* from Eventlog where EventDate = ?";
+        String sql = "Select* from Eventlog where EventDate = ? ORDER BY EventLog.EventTime";
+        DateTime date = new DateTime("2015-01-30");
+        Timestamp timestamp1 = Timestamp.valueOf("2015-01-01 00:00:00");
+
 
         try {
             conn = dbConnection.getDbConnection();
             preparedStatement = conn.prepareStatement(sql);
-            preparedStatement.setTimestamp(1, timestamp);
+            preparedStatement.setTimestamp(1, timestamp1);
             resultSet = preparedStatement.executeQuery();
 
             ResultSetConverter resultSetConverter = new ResultSetConverter();

@@ -11,40 +11,42 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
-@Component
+
 public class MainSolver {
 
 
-    @Autowired
-    PersonListPrepare personListPrepare;
-    @Autowired
-    DateTimeConverter dateTimeConverter;
-    @Autowired
-    TimeByDaySolver timeByDaySolver;
 
-    String timeValue;
+    private PersonListPrepare personListPrepare = new PersonListPrepare();
 
-    public List prepare(String PersonIdList, String date, String time) throws ParseException {
+    private DateTimeConverter dateTimeConverter = new DateTimeConverter();
+
+    private TimeByDaySolver timeByDaySolver = new TimeByDaySolver();
+
+    private String timeValue;
+
+
+    private List prepare(String dateFrom, String dateTill, String PersonIdList, String time) throws ParseException {
 
 
         List persons = personListPrepare.convert(PersonIdList);
 
-        Timestamp timeInTimestamp = dateTimeConverter.convertTime(time);
-        Timestamp dateInTimestamp = dateTimeConverter.convertDate(date);
+        
+        Timestamp dateFromInTimestamp = dateTimeConverter.convertDate(dateFrom);
+        Timestamp dateTillInTimestamp = dateTimeConverter.convertDate(dateTill);
 
         List listOfPrepared = new ArrayList();
 
-        listOfPrepared.add(0,dateInTimestamp);
-        listOfPrepared.add(1,timeInTimestamp);
+        listOfPrepared.add(0,dateFromInTimestamp);
+        listOfPrepared.add(1,dateTillInTimestamp);
         listOfPrepared.add(2,persons);
 
 
         return listOfPrepared ;
     }
 
-    public String solve(String date, String time, String personIdList) throws ParseException {
+    public String solve(String dateFrom, String dateTill, String personIdList, String time) throws ParseException {
 
-        List listOfPreparedData = this.prepare(personIdList, date, time);
+        List listOfPreparedData = this.prepare(dateFrom, dateTill, personIdList, time);
 
 
         timeByDaySolver.solve(listOfPreparedData);

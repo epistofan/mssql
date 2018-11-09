@@ -15,18 +15,13 @@ import java.util.List;
 import java.util.Stack;
 import java.util.stream.Stream;
 
-@Component
+
 public class TimeByDaySolver {
 
-    int i = 0;
-    int j;
-    List events4 = new ArrayList();
+    private int i = 0;
+    private int j;
+    private List events4 = new ArrayList();
 
-
-    @Autowired
-    DateTimeConverter dateTimeConverter;
-    @Autowired
-    Repository repository;
 
     private List<Events> eventsOfOneDay;
     Stack<EventLog> events = new Stack<>();
@@ -34,32 +29,21 @@ public class TimeByDaySolver {
 
     public String solve(List listOfPreparedData) {
 
-        Timestamp date3 = (Timestamp) listOfPreparedData.get(0);
-        Timestamp time3 = (Timestamp) listOfPreparedData.get(1);
+        Timestamp dateFrom = (Timestamp) listOfPreparedData.get(0);
+        Timestamp dateTill = (Timestamp) listOfPreparedData.get(1);
         List<String> userId = (List<String>) listOfPreparedData.get(2);
 
-          System.out.println("choose from events needed id");
 
-          eventsOfOneDay = repository.selectEvents(date3);
+          System.out.println("choose from events needed id");
+          Repository repository = new Repository();
+          eventsOfOneDay = repository.selectEvents(dateFrom);
           Sorting sorting = new Sorting();
           sorting.sort(eventsOfOneDay, userId);
 
 
+        String resultTime = null;
 
 
-
-
-
-        int inTime = dateTimeConverter.convertTime(events.get(0).getEventTime());
-        int outTime = dateTimeConverter.convertTime(events.get(1).getEventTime());
-
-
-        System.out.println(outTime-inTime);
-
-        int timeDiff = outTime-inTime;
-        String resultTime = dateTimeConverter.timeString(timeDiff);
-
-        System.out.println(resultTime);
 
         return resultTime;
     }

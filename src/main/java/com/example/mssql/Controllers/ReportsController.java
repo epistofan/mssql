@@ -21,11 +21,9 @@ import java.util.*;
 public class ReportsController {
 
 
-    @Autowired
-    Repository repository;
 
-    @Autowired
-    MainSolver mainSolver;
+    Repository repository = new Repository();
+    MainSolver mainSolver = new MainSolver();
 
 
 
@@ -41,11 +39,11 @@ public class ReportsController {
     public String main(Map<String, Object> model) {
 
     Iterable<Person> person = repository.selectPerson();
-IntervalSolver intervalSolver = new IntervalSolver();
-intervalSolver.solve();
     Iterable<OrgUnit> orgUnits = repository.selectOrgUnits();
 
-    //repository.selectWorkHistory(14);
+        IntervalSolver intervalSolver = new IntervalSolver();
+        intervalSolver.solve();
+
     model.put("person", person);
     model.put("orgunits", orgUnits);
 
@@ -58,7 +56,7 @@ intervalSolver.solve();
 
 
 
-            String result = mainSolver.solve(dateFrom, time, personIdList);
+            String result = mainSolver.solve(dateFrom, dateTill, time, personIdList);
 
             model.put("all", result);
 

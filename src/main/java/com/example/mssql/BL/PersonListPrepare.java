@@ -6,14 +6,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-@Component
 public class PersonListPrepare {
 
 
 
     public List<String> convert (String PersonIdList){
 
-            ArrayList listOfUserId = new ArrayList(Arrays.asList(PersonIdList.split(",")));
+            List listOfUserId = new ArrayList(Arrays.asList(PersonIdList.split(",")));
 
         return listOfUserId;
     }
