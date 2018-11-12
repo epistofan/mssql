@@ -1,19 +1,17 @@
-package com.example.mssql.BL;
+package com.example.mssql.BL.DataPrep;
 
 import org.joda.time.LocalTime;
-import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
-import java.text.ParseException;
 
 
-
-public class DateTimeConverter {
+public class DateTimeConverter implements Converter{
 
     private int timeInMs;
     private String timeInString;
 
-    public Timestamp convertDate(String dateFrom) throws ParseException {
+    @Override
+    public Timestamp convertDate(String dateFrom)  {
         String TimeOfTimestamp = " 00:00:00";
         Timestamp convertedDate = Timestamp.valueOf(dateFrom+TimeOfTimestamp);
         System.out.println(convertedDate);
@@ -22,7 +20,8 @@ public class DateTimeConverter {
 
     }
 
-    public Timestamp convertTime(String time) throws ParseException {
+    @Override
+    public Timestamp convertTime(String time) {
 
         String dateOfTimestamp = "1900-01-01 ";
         Timestamp convertedTime = Timestamp.valueOf(dateOfTimestamp + time);

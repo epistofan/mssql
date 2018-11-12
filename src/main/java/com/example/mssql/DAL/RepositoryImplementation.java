@@ -1,10 +1,10 @@
-package com.example.mssql.DAO;
+package com.example.mssql.DAL;
 
-import com.example.mssql.BL.DbConnection;
-import com.example.mssql.BL.ResultSetConverter;
+import com.example.mssql.BL.DataPrep.ResultSetConverter;
 import com.example.mssql.domain.*;
 
 import org.joda.time.DateTime;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 
@@ -13,8 +13,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-
-public class Repository {
+@Component
+@Scope(value = "prototype")
+public class RepositoryImplementation implements Repository {
 
             ResultSet resultSet = null;
             Statement statement = null;
@@ -26,11 +27,8 @@ public class Repository {
             private List<Keys> keys = new ArrayList<>();
             List<WorkHistory> workHistories = new ArrayList<>();
 
-    public List<EventLog> select(Timestamp date3, Timestamp time3){
 
-            return null;
-    }
-
+    @Override
     public List<Person> selectPerson () {
 
             String sqlStat = "select* from Person where Deleted=0";
@@ -63,6 +61,7 @@ public class Repository {
         return rperson;
     }
 
+    @Override
     public List<Events> selectEvents (Timestamp timestamp) {
 
         /*String sql = "SELECT WorkHistory.KeyID, WorkHistory.PersonID, WorkHistory.Date_End, EventLog.KeyCode, EventLog.EventTime, EventLog.EventDate, EventLog.DeviceID, "
@@ -97,7 +96,7 @@ public class Repository {
     }
 
 
-
+    @Override
     public List<OrgUnit> selectOrgUnits () {
 
         String sqlStat = "select* from OrgUnit where Deleted=0";

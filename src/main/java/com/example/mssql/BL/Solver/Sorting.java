@@ -1,10 +1,7 @@
 package com.example.mssql.BL.Solver;
 
-import com.example.mssql.DAO.Repository;
 import com.example.mssql.domain.Events;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 

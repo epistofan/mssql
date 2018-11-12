@@ -1,9 +1,7 @@
 package com.example.mssql.BL.Solver;
 
-import com.example.mssql.BL.DateTimeConverter;
-import com.example.mssql.BL.PersonListPrepare;
-import com.example.mssql.BL.Solver.TimeByDaySolver;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.example.mssql.BL.DataPrep.DateTimeConverter;
+import com.example.mssql.BL.DataPrep.PersonListPrepare;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -12,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
+@Component
 public class MainSolver {
 
 
@@ -30,7 +29,7 @@ public class MainSolver {
 
         List persons = personListPrepare.convert(PersonIdList);
 
-        
+
         Timestamp dateFromInTimestamp = dateTimeConverter.convertDate(dateFrom);
         Timestamp dateTillInTimestamp = dateTimeConverter.convertDate(dateTill);
 

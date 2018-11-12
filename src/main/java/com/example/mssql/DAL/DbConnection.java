@@ -1,10 +1,15 @@
-package com.example.mssql.BL;
+package com.example.mssql.DAL;
+
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+@Component
+@Scope(value = "prototype")
 public class DbConnection {
 
 

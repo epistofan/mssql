@@ -1,4 +1,4 @@
-package com.example.mssql.BL;
+package com.example.mssql.BL.Solver;
 
 import org.joda.time.DateTime;
 

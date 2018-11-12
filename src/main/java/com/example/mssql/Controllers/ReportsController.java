@@ -2,12 +2,11 @@ package com.example.mssql.Controllers;
 
 
 
-import com.example.mssql.BL.IntervalSolver;
+import com.example.mssql.BL.Solver.IntervalSolver;
 import com.example.mssql.BL.Solver.MainSolver;
-import com.example.mssql.DAO.Repository;
+import com.example.mssql.DAL.Repository;
 import com.example.mssql.domain.OrgUnit;
 import com.example.mssql.domain.Person;
-import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +21,9 @@ public class ReportsController {
 
 
 
-    Repository repository = new Repository();
+    @Autowired
+    Repository repository;
+
     MainSolver mainSolver = new MainSolver();
 
 
@@ -31,7 +32,7 @@ public class ReportsController {
 
     /*@ModelAttribute("keys")
     public void addAttributes(Model model) {
-        List<Keys> keys = repository.selectKeys();
+        List<Keys> keys = repositoryImplementation.selectKeys();
 
         model.addAllAttributes(keys);
     }*/
@@ -43,6 +44,7 @@ public class ReportsController {
 
         IntervalSolver intervalSolver = new IntervalSolver();
         intervalSolver.solve();
+
 
     model.put("person", person);
     model.put("orgunits", orgUnits);

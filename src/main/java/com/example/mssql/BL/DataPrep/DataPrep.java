@@ -1,4 +1,4 @@
-package com.example.mssql.BL;
+package com.example.mssql.BL.DataPrep;
 
 
 import org.springframework.stereotype.Component;
