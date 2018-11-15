@@ -7,6 +7,7 @@ public class Events {
 
 
     private int PersonId;
+
     private java.sql.Timestamp EventDate;
     private java.sql.Timestamp EventTime;
     private int DeviceId;

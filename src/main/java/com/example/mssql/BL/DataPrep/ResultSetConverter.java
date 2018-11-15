@@ -1,5 +1,6 @@
 package com.example.mssql.BL.DataPrep;
 
+import com.example.mssql.domain.EventLog;
 import com.example.mssql.domain.Events;
 
 import java.sql.ResultSet;
@@ -11,18 +12,20 @@ public class ResultSetConverter {
 
 
     private int i = 0;
-    private List<Events> events  = new ArrayList();
-   public List<Events> convert (ResultSet resultSet) throws SQLException {
+    private List<EventLog> events  = new ArrayList();
+
+   public List<EventLog> convert (ResultSet resultSet) throws SQLException {
 
 
        while (resultSet.next()) {
 
            //System.out.println(resultSet.getString("LastName"));
-           Events event = new Events();
-           event.setPersonId(resultSet.getInt(2));
-           event.setEventDate(resultSet.getTimestamp(6));
-           event.setEventTime(resultSet.getTimestamp(5));
-           event.setDeviceId(resultSet.getInt(7));
+           EventLog event = new EventLog();
+           //event.setPersonId(resultSet.getInt(2));
+           event.setEventDate(resultSet.getTimestamp(2));
+           event.setEventTime(resultSet.getTimestamp(3));
+           event.setDeviceId(resultSet.getInt(6));
+           event.setKeyCode(resultSet.getString(7));
 
 
            events.add(i, event);

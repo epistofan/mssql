@@ -1,10 +1,14 @@
 package com.example.mssql.BL.DataPrep;
 
 import org.joda.time.LocalTime;
+import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-
+@Component
 public class DateTimeConverter implements Converter{
 
     private int timeInMs;
@@ -29,23 +33,13 @@ public class DateTimeConverter implements Converter{
 
         return convertedTime;
     }
-    public int convertTime(Timestamp timestamp){
 
-        LocalTime dt = new LocalTime(timestamp);
+    @Override
+    public List<String> convert(String PersonIdList) {
+        List listOfUserId = new ArrayList(Arrays.asList(PersonIdList.split(",")));
 
-        timeInMs = dt.getMillisOfDay();
-
-
-
-        return timeInMs;
+        return listOfUserId;
     }
 
-    public String timeString (int timeInMs){
-
-        LocalTime lc = new LocalTime(timeInMs);
-        timeInString = lc.toString();
-
-        return timeInString;
-    }
 
 }

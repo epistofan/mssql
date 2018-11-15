@@ -4,6 +4,8 @@ package com.example.mssql.Controllers;
 
 import com.example.mssql.BL.Solver.IntervalSolver;
 import com.example.mssql.BL.Solver.MainSolver;
+import com.example.mssql.BL.Solver.Parameters;
+import com.example.mssql.BL.Solver.Solver;
 import com.example.mssql.DAL.Repository;
 import com.example.mssql.domain.OrgUnit;
 import com.example.mssql.domain.Person;
@@ -24,8 +26,10 @@ public class ReportsController {
     @Autowired
     Repository repository;
 
-    MainSolver mainSolver = new MainSolver();
-
+    @Autowired
+    Solver solver;
+    @Autowired
+    Parameters parameters;
 
 
 
@@ -56,9 +60,12 @@ public class ReportsController {
     @PostMapping("main")
     public String main(@RequestParam String dateFrom, String dateTill, String time, String personIdList, Map<String, Object> model) throws ParseException {
 
+            parameters.setDateFrom(dateFrom);
+            parameters.setDateTill(dateTill);
+            parameters.setTime(time);
+            parameters.setPersonIdList(personIdList);
 
-
-            String result = mainSolver.solve(dateFrom, dateTill, time, personIdList);
+            String result = solver.solve(parameters);
 
             model.put("all", result);
 

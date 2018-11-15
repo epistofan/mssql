@@ -23,7 +23,7 @@ public class RepositoryImplementation implements Repository {
             java.sql.Connection conn = null;
             DbConnection dbConnection  = new DbConnection ();
 
-            private List<Events> events  = new ArrayList();
+            private List<EventLog> events  = new ArrayList();
             private List<Keys> keys = new ArrayList<>();
             List<WorkHistory> workHistories = new ArrayList<>();
 
@@ -62,7 +62,7 @@ public class RepositoryImplementation implements Repository {
     }
 
     @Override
-    public List<Events> selectEvents (Timestamp timestamp) {
+    public List<EventLog> selectEvents (Timestamp timestamp) {
 
         /*String sql = "SELECT WorkHistory.KeyID, WorkHistory.PersonID, WorkHistory.Date_End, EventLog.KeyCode, EventLog.EventTime, EventLog.EventDate, EventLog.DeviceID, "
                 + "Device.DeviceName "
@@ -77,7 +77,7 @@ public class RepositoryImplementation implements Repository {
 */
         String sql = "Select* from Eventlog where EventDate = ? ORDER BY EventLog.EventTime";
         DateTime date = new DateTime("2015-01-30");
-        Timestamp timestamp1 = Timestamp.valueOf("2015-01-01 00:00:00");
+        java.sql.Timestamp timestamp1 = Timestamp.valueOf("2015-01-01 00:00:00");
 
 
         try {
@@ -125,5 +125,103 @@ public class RepositoryImplementation implements Repository {
 
 
         return orgUnits;
+    }
+
+    @Override
+    public List<Keys> selectKeys(int keyId) {
+
+        String sqlStat = "select* from Keys where ID=?";
+
+        List<Keys> keys  = new ArrayList();
+        try {
+            conn = dbConnection.getDbConnection();
+            preparedStatement = conn.prepareStatement(sqlStat);
+            preparedStatement.setInt(1, keyId);
+            resultSet = preparedStatement.executeQuery();
+
+
+        }  catch (SQLException e) {
+        e.printStackTrace();
+    }
+    try{
+            int i = 0;
+            while (resultSet.next()) {
+
+                Keys key = new Keys();
+                key.setId(resultSet.getInt(1));
+                key.setKeyCode(resultSet.getString(2));
+
+                keys.add(i, key);
+                i++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return keys;
+
+
+    }
+
+    @Override
+    public List<WorkHistory> selectWorkHistory() {
+        String sqlStat = "select* from Keys where ID=?";
+
+        List<WorkHistory> workHistories  = new ArrayList();
+        try {
+            conn = dbConnection.getDbConnection();
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(sqlStat);
+            int i = 0;
+            while (resultSet.next()) {
+
+                WorkHistory workHistory = new WorkHistory();
+                workHistory.setPersonId(resultSet.getInt(2));
+                workHistory.setKeyId(resultSet.getInt(4));
+                workHistory.setDateEnd(resultSet.getTimestamp(6));
+                workHistories.add(i, workHistory);
+                i++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return workHistories;
+
+    }
+
+
+    @Override
+    public List<KeysWithPerson> selectKeysWithPerson() {
+
+        String sqlStat = "SELECT WorkHistory.PersonID, WorkHistory.KeyID, WorkHistory.Date_End, Keys.KeyCode " +
+                "FROM WorkHistory INNER JOIN " +
+                "Keys ON WorkHistory.KeyID = Keys.ID " +
+                "WHERE(WorkHistory.KeyID <> 1) AND (WorkHistory.Date_End > CONVERT(DATETIME, '2015-01-01 00:00:00', 102))";
+
+        List<KeysWithPerson> keysWithPerson  = new ArrayList();
+        try {
+            conn = dbConnection.getDbConnection();
+            statement = conn.createStatement();
+            resultSet = statement.executeQuery(sqlStat);
+            int i = 0;
+            while (resultSet.next()) {
+
+                KeysWithPerson keysWithPerson1 = new KeysWithPerson();
+                keysWithPerson1.setPersonId(resultSet.getInt(1));
+                keysWithPerson1.setKeyId(resultSet.getInt(2));
+                keysWithPerson1.setDateEnd(resultSet.getTimestamp(3));
+                keysWithPerson1.setKeyCode(resultSet.getString(4));
+                keysWithPerson.add(i, keysWithPerson1);
+                i++;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+
+        return keysWithPerson;
     }
 }

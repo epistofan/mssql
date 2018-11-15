@@ -1,7 +1,9 @@
 package com.example.mssql.BL.Solver;
 
+import com.example.mssql.BL.DataPrep.Converter;
 import com.example.mssql.BL.DataPrep.DateTimeConverter;
 import com.example.mssql.BL.DataPrep.PersonListPrepare;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
@@ -11,27 +13,19 @@ import java.util.List;
 
 
 @Component
-public class MainSolver {
+public class MainSolver implements Solver{
 
+    @Autowired
+    Converter converter;
+    @Autowired
+    TimeByDaySolver timeByDaySolver;
 
+    @Override
+    public String solve(Parameters parameters) {
 
-    private PersonListPrepare personListPrepare = new PersonListPrepare();
-
-    private DateTimeConverter dateTimeConverter = new DateTimeConverter();
-
-    private TimeByDaySolver timeByDaySolver = new TimeByDaySolver();
-
-    private String timeValue;
-
-
-    private List prepare(String dateFrom, String dateTill, String PersonIdList, String time) throws ParseException {
-
-
-        List persons = personListPrepare.convert(PersonIdList);
-
-
-        Timestamp dateFromInTimestamp = dateTimeConverter.convertDate(dateFrom);
-        Timestamp dateTillInTimestamp = dateTimeConverter.convertDate(dateTill);
+        List<String>persons = converter.convert(parameters.getPersonIdList());
+        Timestamp dateFromInTimestamp = converter.convertDate(parameters.getDateFrom());
+        Timestamp dateTillInTimestamp = converter.convertDate(parameters.getDateTill());
 
         List listOfPrepared = new ArrayList();
 
@@ -40,19 +34,8 @@ public class MainSolver {
         listOfPrepared.add(2,persons);
 
 
-        return listOfPrepared ;
+        timeByDaySolver.solve(listOfPrepared);
+
+        return null;
     }
-
-    public String solve(String dateFrom, String dateTill, String personIdList, String time) throws ParseException {
-
-        List listOfPreparedData = this.prepare(dateFrom, dateTill, personIdList, time);
-
-
-        timeByDaySolver.solve(listOfPreparedData);
-
-
-        return timeValue;
-    }
-
-
 }

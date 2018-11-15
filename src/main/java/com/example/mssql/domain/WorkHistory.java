@@ -4,6 +4,7 @@ package com.example.mssql.domain;
 
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,21 +20,11 @@ public class WorkHistory {
 
 
 
-    private Person person;
+    private int personId;
 
+    private int keyId;
 
-
-    private Keys keys;
-
-
-
-    public Keys getKeys() {
-        return keys;
-    }
-
-    public void setKeys(Keys keys) {
-        this.keys = keys;
-    }
+    private Timestamp dateEnd;
 
     public int getId() {
         return Id;
@@ -43,11 +34,27 @@ public class WorkHistory {
         Id = id;
     }
 
-    public Person getPerson() {
-        return person;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setPerson(Person person) {
-        this.person = person;
+    public void setPersonId(int personId) {
+        this.personId = personId;
+    }
+
+    public int getKeyId() {
+        return keyId;
+    }
+
+    public void setKeyId(int keyId) {
+        this.keyId = keyId;
+    }
+
+    public Timestamp getDateEnd() {
+        return dateEnd;
+    }
+
+    public void setDateEnd(Timestamp dateEnd) {
+        this.dateEnd = dateEnd;
     }
 }
