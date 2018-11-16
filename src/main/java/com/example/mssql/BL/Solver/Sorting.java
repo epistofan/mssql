@@ -79,9 +79,16 @@ public class Sorting {
 
             sorted.push(duration);
 
-            System.out.println(duration.plus(duration));
+
 
         }
+        int g;
+for (g = 0; !sorted.isEmpty(); g++){
+    Duration duration = (Duration) sorted.pop();
+    Duration duration1 = (Duration) sorted.pop();
 
+    duration.plus(duration1);
+
+}
     }
 }
