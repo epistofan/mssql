@@ -68,15 +68,20 @@ public class Sorting {
         zhopa = (Stack<EventLog>) eventsByPersonId.get(9);
 
         while (!zhopa.isEmpty()) {
-          System.out.println(zhopa.pop().getEventTime().toLocalDateTime());
-            System.out.println(zhopa.pop().getEventTime().toLocalDateTime());
 
+            System.out.println(zhopa.peek().getEventTime().toLocalDateTime());
             LocalDateTime localDateTime = (zhopa.pop().getEventTime().toLocalDateTime());
+            System.out.println(zhopa.peek().getEventTime().toLocalDateTime());
             LocalDateTime localDateTime2 = (zhopa.pop().getEventTime().toLocalDateTime());
 
             Duration duration = Duration.between(localDateTime2, localDateTime);
+            System.out.println(duration.toString());
 
+            sorted.push(duration);
+
+            System.out.println(duration.plus(duration));
 
         }
+
     }
 }
