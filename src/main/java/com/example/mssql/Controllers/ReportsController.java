@@ -40,7 +40,7 @@ public class ReportsController {
 
         model.addAllAttributes(keys);
     }*/
-    @GetMapping("/main")
+    @GetMapping("/")
     public String main(Map<String, Object> model) {
 
     Iterable<Person> person = repository.selectPerson();
@@ -83,4 +83,10 @@ public class ReportsController {
         return "calculator";
     }
 
+    @GetMapping("login")
+    public String login(Map<String, Object> model){
+
+
+        return "login";
+    }
 }
