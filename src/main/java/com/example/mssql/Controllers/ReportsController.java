@@ -9,12 +9,16 @@ import com.example.mssql.BL.Solver.Solver;
 import com.example.mssql.DAL.Repository;
 import com.example.mssql.domain.OrgUnit;
 import com.example.mssql.domain.Person;
+import com.example.mssql.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.HttpRequestHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.ParseException;
 import java.util.*;
 
@@ -86,7 +90,25 @@ public class ReportsController {
     @GetMapping("login")
     public String login(Map<String, Object> model){
 
+        User user  = new User();
 
         return "login";
     }
+
+    @PostMapping("login")
+    public String login1(HttpServletRequest httpRequest, Map<String, Object> model, String username, String password, User user){
+
+
+        user.setPassword(password);
+        user.setUsername(username);
+        if(user.getUsername().equals("admin") ){
+            httpRequest.getSession().setAttribute("LOGGED_USER", user);
+        }
+
+
+
+        return "login";
+    }
+
+
 }
