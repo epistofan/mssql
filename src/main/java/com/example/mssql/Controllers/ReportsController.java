@@ -90,25 +90,27 @@ public class ReportsController {
     @GetMapping("login")
     public String login(Map<String, Object> model){
 
-        User user  = new User();
+
 
         return "login";
     }
 
     @PostMapping("login")
-    public String login1(HttpServletRequest httpRequest, Map<String, Object> model, String username, String password, User user){
-
-
-        user.setPassword(password);
-        user.setUsername(username);
-        if(user.getUsername().equals("admin") ){
-            httpRequest.getSession().setAttribute("LOGGED_USER", user);
-        }
-
+    public String login1(HttpServletRequest httpRequest, Map<String, Object> model, String username, String password){
 
 
         return "login";
     }
+    @PostMapping("index")
+    public String index(){
 
 
+        return "index";
+    }
+    @GetMapping("index")
+    public String index1(){
+
+
+        return "index";
+    }
 }

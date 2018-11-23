@@ -21,17 +21,15 @@ public class CustomFilter2 implements Filter {
 
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-       if((request.getSession().getAttribute("LOGGED_USER"))== null){
 
-          System.out.println("you are not logged");
-           System.out.println(servletRequest.getLocale());
-           rdObj = servletRequest.getRequestDispatcher("/login");
-           rdObj.include(servletRequest, servletResponse);
-       }else{
-           System.out.println("you are logged");
-           rdObj = servletRequest.getRequestDispatcher("/main");
-           rdObj.include(servletRequest, servletResponse);
-       }
+
+        if(request.getSession().getAttribute("LOGGED_USER") != null){
+            rdObj = servletRequest.getRequestDispatcher("/index");
+            rdObj.include(servletRequest, servletResponse);
+        }else { rdObj = servletRequest.getRequestDispatcher("/login");
+            rdObj.include(servletRequest, servletResponse);
+
+        }
 
         //call next filter in the filter chain
        // filterChain.doFilter(servletRequest, servletResponse);
