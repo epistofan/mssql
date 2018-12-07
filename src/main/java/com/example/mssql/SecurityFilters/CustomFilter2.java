@@ -1,4 +1,4 @@
-package com.example.mssql;
+package com.example.mssql.SecurityFilters;
 
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
@@ -24,9 +24,9 @@ public class CustomFilter2 implements Filter {
 
 
         if(request.getSession().getAttribute("LOGGED_USER") != null){
-            rdObj = servletRequest.getRequestDispatcher("/index");
+            rdObj = servletRequest.getRequestDispatcher("start");
             rdObj.include(servletRequest, servletResponse);
-        }else { rdObj = servletRequest.getRequestDispatcher("/login");
+        }else { rdObj = servletRequest.getRequestDispatcher("index");
             rdObj.include(servletRequest, servletResponse);
 
         }

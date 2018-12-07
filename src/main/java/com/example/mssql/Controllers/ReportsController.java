@@ -87,30 +87,30 @@ public class ReportsController {
         return "calculator";
     }
 
-    @GetMapping("login")
+    @GetMapping("index")
     public String login(Map<String, Object> model){
 
 
 
-        return "login";
+        return "index";
     }
 
-    @PostMapping("login")
+    @PostMapping("index")
     public String login1(HttpServletRequest httpRequest, Map<String, Object> model, String username, String password){
 
 
-        return "login";
+        return "index";
     }
-    @PostMapping("index")
-    public String index(){
+    @PostMapping("start")
+    public String start(){
 
 
         return "index";
     }
-    @GetMapping("index")
+    @GetMapping("start")
     public String index1(){
 
 
-        return "index";
+        return "start";
     }
 }

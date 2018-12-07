@@ -1,7 +1,9 @@
-package com.example.mssql;
+package com.example.mssql.SecurityFilters;
 
+import com.example.mssql.BL.Validator;
 import com.example.mssql.domain.User;
 import org.apache.catalina.Session;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
@@ -18,6 +20,8 @@ import java.io.IOException;
 @Order(1)
 public class AuthFilter implements Filter {
 
+    @Autowired
+    Validator validator;
 
     String password;
     String usrname;
@@ -41,16 +45,18 @@ public class AuthFilter implements Filter {
 
                filterChain.doFilter(servletRequest, servletResponse);
 
-
-
             }else if(request.getMethod().equals("POST")) {
             System.out.println("post");
+
+
+               // validator.validateLoginData();
+
             System.out.println(usrname = servletRequest.getParameter("username"));
             if (servletRequest.getParameter("username").equals("Admin")) {
 
                 System.out.println("you are logged");
                 request.getSession().setAttribute("LOGGED_USER", user);
-                rdObj = servletRequest.getRequestDispatcher("/index");
+                rdObj = servletRequest.getRequestDispatcher("start");
 
 
                 rdObj.include(servletRequest, servletResponse);
