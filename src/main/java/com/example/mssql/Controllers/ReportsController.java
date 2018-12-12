@@ -44,7 +44,7 @@ public class ReportsController {
 
         model.addAllAttributes(keys);
     }*/
-    @GetMapping("/")
+    @GetMapping("main")
     public String main(Map<String, Object> model) {
 
     Iterable<Person> person = repository.selectPerson();
@@ -88,13 +88,19 @@ public class ReportsController {
     }
 
     @GetMapping("index")
-    public String login(Map<String, Object> model){
+    public String index(Map<String, Object> model){
 
 
 
         return "index";
     }
+    @GetMapping("/")
+    public String index1(Map<String, Object> model){
 
+
+
+        return "index";
+    }
     @PostMapping("index")
     public String login1(HttpServletRequest httpRequest, Map<String, Object> model, String username, String password){
 
@@ -105,7 +111,7 @@ public class ReportsController {
     public String start(){
 
 
-        return "index";
+        return "start";
     }
     @GetMapping("start")
     public String index1(){

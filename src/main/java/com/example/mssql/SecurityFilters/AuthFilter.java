@@ -4,20 +4,24 @@ import com.example.mssql.BL.Validator;
 import com.example.mssql.domain.User;
 import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
+import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@Component
-@Order(1)
+import static java.io.FileDescriptor.out;
+
+
+@WebFilter(urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
     @Autowired
@@ -37,7 +41,9 @@ public class AuthFilter implements Filter {
 
 
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
 
+      System.out.println( response.getStatus());
         User user = new User();
 
             if(request.getMethod().equals("GET")){
@@ -56,11 +62,17 @@ public class AuthFilter implements Filter {
 
                 System.out.println("you are logged");
                 request.getSession().setAttribute("LOGGED_USER", user);
-                rdObj = servletRequest.getRequestDispatcher("start");
+                rdObj = servletRequest.getRequestDispatcher("/start");
 
 
-                rdObj.include(servletRequest, servletResponse);
+                rdObj.forward(servletRequest, servletResponse);
 
+            }else{
+
+                rdObj = servletRequest.getRequestDispatcher("/index");
+
+
+                rdObj.forward(servletRequest, servletResponse);
             }
         }
 
