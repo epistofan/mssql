@@ -88,7 +88,7 @@ public class ReportsController {
     }
 
     @GetMapping("index")
-    public String index(Map<String, Object> model){
+    public String index(){
 
 
 

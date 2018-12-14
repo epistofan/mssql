@@ -13,7 +13,7 @@ public class WebConfig {
 
     @Bean
     public FilterRegistrationBean authFilter() {
-        FilterRegistrationBean filterRegBean = new FilterRegistrationBean<>();
+        FilterRegistrationBean filterRegBean = new FilterRegistrationBean();
         filterRegBean.setFilter(new AuthFilter ());
         filterRegBean.addUrlPatterns("/*");
         filterRegBean.setEnabled(Boolean.TRUE);
@@ -27,7 +27,7 @@ public class WebConfig {
 
     @Bean
     public FilterRegistrationBean customFilter2() {
-        FilterRegistrationBean filterRegBean = new FilterRegistrationBean<>();
+        FilterRegistrationBean filterRegBean = new FilterRegistrationBean();
         filterRegBean.setFilter(new CustomFilter2());
         filterRegBean.addUrlPatterns("/index/*");
         filterRegBean.setEnabled(Boolean.TRUE);

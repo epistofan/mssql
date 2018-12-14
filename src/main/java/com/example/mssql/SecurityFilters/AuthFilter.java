@@ -29,6 +29,7 @@ public class AuthFilter implements Filter {
 
     String password;
     String usrname;
+    String param;
 
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -39,7 +40,7 @@ public class AuthFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         RequestDispatcher rdObj = null;
 
-
+        System.out.println("filter-1");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
@@ -47,7 +48,12 @@ public class AuthFilter implements Filter {
         User user = new User();
 
             if(request.getMethod().equals("GET")){
+
+                param = servletRequest.getParameter("param");
+                request.getSession().removeAttribute("LOGGED_USER");
                 System.out.println("you are not logged");
+
+
 
                filterChain.doFilter(servletRequest, servletResponse);
 

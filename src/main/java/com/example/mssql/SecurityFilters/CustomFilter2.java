@@ -21,7 +21,7 @@ public class CustomFilter2 implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         RequestDispatcher rdObj = null;
 
-
+        System.out.println("filter-2");
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
