@@ -64,17 +64,6 @@ public class RepositoryImplementation implements Repository {
     @Override
     public List<EventLog> selectEvents (Timestamp timestamp) {
 
-        /*String sql = "SELECT WorkHistory.KeyID, WorkHistory.PersonID, WorkHistory.Date_End, EventLog.KeyCode, EventLog.EventTime, EventLog.EventDate, EventLog.DeviceID, "
-                + "Device.DeviceName "
-                +"FROM WorkHistory INNER JOIN "
-                +"Person ON WorkHistory.PersonID = Person.PersonID INNER JOIN "
-                +"Keys ON WorkHistory.KeyID = Keys.ID INNER JOIN "
-                +"EventLog ON Keys.KeyCode = EventLog.KeyCode INNER JOIN "
-                +"Device ON EventLog.DeviceID = Device.DeviceID "
-                +"WHERE (Person.PersonID = 99) AND (WorkHistory.KeyID <> 1) AND (WorkHistory.Date_End > '2015-01-01') AND (EventLog.EventDate = CONVERT(DATETIME, "
-                +"'2015-01-01 00:00:00', 102)) "
-                +"ORDER BY EventLog.EventTime";
-*/
         String sql = "Select* from Eventlog where EventDate = ? ORDER BY EventLog.EventTime";
         DateTime date = new DateTime("2015-01-30");
         java.sql.Timestamp timestamp1 = Timestamp.valueOf("2015-01-01 00:00:00");
@@ -194,18 +183,19 @@ public class RepositoryImplementation implements Repository {
 
 
     @Override
-    public List<KeysWithPerson> selectKeysWithPerson() {
+    public List<KeysWithPerson> selectKeysWithPerson(Timestamp dateFromInTimestamp) {
 
         String sqlStat = "SELECT WorkHistory.PersonID, WorkHistory.KeyID, WorkHistory.Date_End, Keys.KeyCode " +
                 "FROM WorkHistory INNER JOIN " +
                 "Keys ON WorkHistory.KeyID = Keys.ID " +
-                "WHERE(WorkHistory.KeyID <> 1) AND (WorkHistory.Date_End > CONVERT(DATETIME, '2015-01-01 00:00:00', 102))";
+                "WHERE(WorkHistory.KeyID <> 1) AND (WorkHistory.Date_End > ?)";
 
         List<KeysWithPerson> keysWithPerson  = new ArrayList();
         try {
             conn = dbConnection.getDbConnection();
-            statement = conn.createStatement();
-            resultSet = statement.executeQuery(sqlStat);
+            preparedStatement = conn.prepareStatement(sqlStat);
+            preparedStatement.setTimestamp(1, dateFromInTimestamp);
+            resultSet = preparedStatement.executeQuery();
             int i = 0;
             while (resultSet.next()) {
 

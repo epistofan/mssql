@@ -1,27 +1,17 @@
 package com.example.mssql.SecurityFilters;
 
-import com.example.mssql.BL.Validator;
+import com.example.mssql.BL.DataValidation.Validator;
 import com.example.mssql.domain.User;
-import org.apache.catalina.Session;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.Ordered;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
 
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-import static java.io.FileDescriptor.out;
 
-
-@WebFilter(urlPatterns = "/*")
+//@WebFilter(urlPatterns = "/*")
 public class AuthFilter implements Filter {
 
     @Autowired

@@ -20,5 +20,5 @@ public interface Repository {
 
     public List<WorkHistory> selectWorkHistory ();
 
-    public List<KeysWithPerson> selectKeysWithPerson();
+    public List<KeysWithPerson> selectKeysWithPerson(Timestamp dateFrom);
 }

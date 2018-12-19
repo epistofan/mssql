@@ -1,4 +1,4 @@
-package com.example.mssql.BL;
+package com.example.mssql.BL.DataValidation;
 
 
 import org.springframework.context.annotation.Scope;

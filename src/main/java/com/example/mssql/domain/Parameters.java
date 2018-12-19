@@ -1,4 +1,4 @@
-package com.example.mssql.BL.Solver;
+package com.example.mssql.domain;
 
 import org.springframework.stereotype.Component;
 

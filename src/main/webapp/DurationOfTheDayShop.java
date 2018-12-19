@@ -1,8 +1,7 @@
-package com.example.mssql.BL.Solver;
+package com.example.mssql.BL.Factory;
 
 import com.example.mssql.DAL.Repository;
 import com.example.mssql.domain.EventLog;
-import com.example.mssql.domain.Events;
 import com.example.mssql.domain.KeysWithPerson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -13,11 +12,11 @@ import java.util.List;
 import java.util.Stack;
 
 @Component
-public class TimeByDaySolver {
+public class DurationOfTheDayShop {
 
 
     @Autowired
-    Sorting sorting;
+    EventsByPersonIdShop eventsByPersonIdShop;
 
     private int i = 0;
     private int j;
@@ -30,6 +29,8 @@ public class TimeByDaySolver {
 
     @Autowired
     private Repository repository;
+    @Autowired
+    DurOfTheDayShop durOfTheDayShop;
 
 
     public String solve(List listOfPreparedData) {
@@ -42,11 +43,12 @@ public class TimeByDaySolver {
           System.out.println("choose from events needed id");
 
           eventsOfOneDay = repository.selectEvents(dateFrom);
-          keysWithPersonList=repository.selectKeysWithPerson();
-
-            sorting.sort1(eventsOfOneDay, keysWithPersonList);
+          keysWithPersonList=repository.selectKeysWithPerson(dateFrom);
 
 
+
+
+        durOfTheDayShop.solver(eventsByPersonIdShop.sort1(eventsOfOneDay, keysWithPersonList));
 
         String resultTime = null;
 
