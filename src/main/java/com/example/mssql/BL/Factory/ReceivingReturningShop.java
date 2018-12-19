@@ -3,7 +3,6 @@ package com.example.mssql.BL.Factory;
 import com.example.mssql.BL.DataPrep.Converter;
 import com.example.mssql.DAL.Repository;
 import com.example.mssql.domain.EventLog;
-import com.example.mssql.domain.Events;
 import com.example.mssql.domain.KeysWithPerson;
 import com.example.mssql.domain.Parameters;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,9 +30,9 @@ public class ReceivingReturningShop {
     private List<EventLog> eventsOfOneDay;
     private List<KeysWithPerson> keysWithPersonList;
     private HashMap<Integer, Stack<EventLog>> eventsByPersonId =new HashMap<>();
+    private HashMap<Integer, Object> readyList = new HashMap<>();
 
-
-    public String solve(Parameters parameters) {
+    public HashMap<Integer, Object> solve(Parameters parameters) {
 
         List<String>persons = converter.convert(parameters.getPersonIdList());
         Timestamp dateFromInTimestamp = converter.convertDate(parameters.getDateFrom());
@@ -44,14 +43,9 @@ public class ReceivingReturningShop {
 
         eventsByPersonId = eventsByPersonIdShop.sort1(eventsOfOneDay, keysWithPersonList);
 
-        durationOfTheDayShop.solver(eventsByPersonId);
+        readyList = durationOfTheDayShop.solver(eventsByPersonId);
 
 
-
-
-
-
-
-        return null;
+        return readyList;
     }
 }

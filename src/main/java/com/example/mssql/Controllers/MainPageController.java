@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.text.ParseException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
 public class MainPageController {
@@ -28,11 +31,12 @@ public class MainPageController {
         parameters.setTime(time);
         parameters.setPersonIdList(personIdList);
 
-        String result = receivingReturningShop.solve(parameters);
+        HashMap<Integer, Object> result = receivingReturningShop.solve(parameters);
 
-        model.put("all", result);
+        model.put("result", result.get(9));
 
-        model.put("dayNumber", dateFrom);
+        model.put("date", dateFrom);
+
         return "main";
 
     }

@@ -65,9 +65,8 @@ public class RepositoryImplementation implements Repository {
     public List<EventLog> selectEvents (Timestamp timestamp) {
 
         String sql = "Select* from Eventlog where EventDate = ? ORDER BY EventLog.EventTime";
-        DateTime date = new DateTime("2015-01-30");
-        java.sql.Timestamp timestamp1 = Timestamp.valueOf("2015-01-01 00:00:00");
 
+        java.sql.Timestamp timestamp1 = Timestamp.valueOf("2015-01-01 00:00:00");
 
         try {
             conn = dbConnection.getDbConnection();

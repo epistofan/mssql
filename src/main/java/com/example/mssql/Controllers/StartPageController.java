@@ -24,10 +24,6 @@ public class StartPageController {
         Iterable<Person> person = repository.selectPerson();
         Iterable<OrgUnit> orgUnits = repository.selectOrgUnits();
 
-        IntervalSolver intervalSolver = new IntervalSolver();
-        intervalSolver.solve();
-
-
         model.put("person", person);
         model.put("orgunits", orgUnits);
 
