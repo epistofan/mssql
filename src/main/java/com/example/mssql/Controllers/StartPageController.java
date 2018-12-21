@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -21,7 +22,7 @@ public class StartPageController {
     @GetMapping("main")
     public String main(Map<String, Object> model) {
 
-        Iterable<Person> person = repository.selectPerson();
+        List<Person> person = repository.selectPerson();
         Iterable<OrgUnit> orgUnits = repository.selectOrgUnits();
 
         model.put("person", person);
