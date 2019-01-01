@@ -258,30 +258,32 @@ input[type=button], input[type=submit], input[type=reset] {
             <button class="button" type="submit">Enter</button>
 
         </form>-->
-<div>
+<!--<div>
 {{#result}}
     <div>{{date}}</div>
-    <div class="tooltip">{{DeviceId}}
-        <span class="tooltiptext">testik</span>
+    <div class="tooltip">{{workingTimePairs}}
+        <span class="tooltiptext">{{id}}</span>
     </div>
 
 {{/result}}
-</div>
+</div>-->
         <table>
             <tr>
-                <th>code</th>
-                <th></th>
-                <th>email</th>
+
+                <th>id</th>
+                <th>{{date}}</th>
             </tr>
 
 
-
+{{#result}}
 
                 <tr>
-                    <td><b></b></td>
-                    <td><b></b></td>
-                </tr>
 
+                    <td><b>{{id}}</b></td>
+                    <td><b>{{workingTimePairs}}</b></td>
+
+                </tr>
+    {{/result}}
 
 
         </table>

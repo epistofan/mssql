@@ -5,10 +5,12 @@ import com.example.mssql.DAL.Repository;
 import com.example.mssql.domain.EventLog;
 import com.example.mssql.domain.KeysWithPerson;
 import com.example.mssql.domain.Parameters;
+import com.example.mssql.domain.PersonsWithTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Stack;
@@ -30,9 +32,9 @@ public class ReceivingReturningShop {
     private List<EventLog> eventsOfOneDay;
     private List<KeysWithPerson> keysWithPersonList;
     private HashMap<Integer, Stack<EventLog>> eventsByPersonId =new HashMap<>();
-    private HashMap<Integer, Object> readyList = new HashMap<>();
+    private List<PersonsWithTime> readyList = new ArrayList<>();
 
-    public HashMap<Integer, Object> solve(Parameters parameters) {
+    public List<PersonsWithTime> solve(Parameters parameters) {
 
         List<String>persons = converter.convert(parameters.getPersonIdList());
         Timestamp dateFromInTimestamp = converter.convertDate(parameters.getDateFrom());

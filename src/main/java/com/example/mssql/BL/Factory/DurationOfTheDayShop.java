@@ -2,6 +2,7 @@ package com.example.mssql.BL.Factory;
 
 
 import com.example.mssql.domain.EventLog;
+import com.example.mssql.domain.PersonsWithTime;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -14,17 +15,17 @@ public class DurationOfTheDayShop {
         private int i;
         private int j;
         private HashMap<Integer, Object> workingTimePairs = new HashMap<>();
+        private List<PersonsWithTime> personsWithTimeList = new ArrayList<>();
 
-    public HashMap<Integer, Object> solver(HashMap<Integer, Stack<EventLog>> eventsByPersonId) throws EmptyStackException {
-
-
-
+    public List<PersonsWithTime> solver(HashMap<Integer, Stack<EventLog>> eventsByPersonId) throws EmptyStackException {
 
             Set test = eventsByPersonId.keySet();
             Iterator iterator = test.iterator();
 
         for (j=0 ; j < eventsByPersonId.size(); j++) {
-            Stack pairs = new Stack();
+           // Stack pairs = new Stack();
+            List<Duration> pairs = new ArrayList<>();
+            PersonsWithTime personsWithTime = new PersonsWithTime();
             i = (Integer) iterator.next();
             try {
                 System.out.println("id "+i);
@@ -39,16 +40,19 @@ public class DurationOfTheDayShop {
                             Duration duration = Duration.between(localDateTime2, localDateTime);
                         System.out.println(duration.toString());
 
-                        pairs.push(duration.toString());
+                        pairs.add(duration);
+                        personsWithTime.setWorkingTimePairs(pairs);
                     }
             }catch (EmptyStackException exception){
                 exception.printStackTrace();
                 System.out.println("Empty or no end time");
             }
-            workingTimePairs.put(i, pairs);
+            //workingTimePairs.put(i, pairs);
+            personsWithTime.setId(i);
+            personsWithTimeList.add(personsWithTime);
         }
 
-        return workingTimePairs;
+        return personsWithTimeList;
     }
 
 

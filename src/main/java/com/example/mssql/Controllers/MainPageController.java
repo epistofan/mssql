@@ -5,6 +5,7 @@ import com.example.mssql.BL.Factory.ReceivingReturningShop;
 import com.example.mssql.domain.EventLog;
 import com.example.mssql.domain.Events;
 import com.example.mssql.domain.Parameters;
+import com.example.mssql.domain.PersonsWithTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,17 +31,8 @@ public class MainPageController {
         parameters.setTime(time);
         parameters.setPersonIdList(personIdList);
 
-        HashMap<Integer, Object> result1 = receivingReturningShop.solve(parameters);
+        List<PersonsWithTime> result = receivingReturningShop.solve(parameters);
 
-        List<Events> result = new ArrayList<>();
-
-        Events event1 = new Events();
-        event1.setDeviceId(333);
-        result.add(event1);
-
-        Events event2 = new Events();
-        event2.setDeviceId(4444);
-        result.add(event2);
 
         model.put("result", result);
 
