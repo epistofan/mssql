@@ -258,29 +258,22 @@ input[type=button], input[type=submit], input[type=reset] {
             <button class="button" type="submit">Enter</button>
 
         </form>-->
-<!--<div>
-{{#result}}
-    <div>{{date}}</div>
-    <div class="tooltip">{{workingTimePairs}}
-        <span class="tooltiptext">{{id}}</span>
-    </div>
 
-{{/result}}
-</div>-->
         <table>
             <tr>
 
                 <th>id</th>
-                <th>{{date}}</th>
+{{#result}}
+                <th>{{dateTime}}</th>
+{{/result}}
             </tr>
 
 
-{{#result}}
-
+    {{#result}}
                 <tr>
 
-                    <td><b>{{id}}</b></td>
-                    <td><b>{{workingTimePairs}}</b></td>
+                    <td><b>s</b></td>
+                    <td><b>{{result}}</b></td>
 
                 </tr>
     {{/result}}

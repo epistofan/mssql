@@ -2,10 +2,7 @@ package com.example.mssql.Controllers;
 
 
 import com.example.mssql.BL.Factory.ReceivingReturningShop;
-import com.example.mssql.domain.EventLog;
-import com.example.mssql.domain.Events;
-import com.example.mssql.domain.Parameters;
-import com.example.mssql.domain.PersonsWithTime;
+import com.example.mssql.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +30,19 @@ public class MainPageController {
 
         List<PersonsWithTime> result = receivingReturningShop.solve(parameters);
 
+        List<TestClass> results = new ArrayList<>();
+        TestClass testClass = new TestClass();
+        testClass.setResult(result);
+        testClass.setDateTime("01.01.2015");
 
-        model.put("result", result);
+        TestClass testClass1 = new TestClass();
+        testClass1.setResult(result);
+        testClass1.setDateTime("02.01.2015");
+
+        results.add(testClass);
+        results.add(testClass1);
+
+        model.put("result", results);
 
         model.put("date", dateFrom);
 
